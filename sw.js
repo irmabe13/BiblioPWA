@@ -18,3 +18,38 @@ if(!navigator.onLine) {
     evt.respondWith(new Response('<h1>Pas de connexion internet</h1><div>Apllication en mode dégradé. Veuillez vous connecter</div>', headers));
 }
 });
+
+const cacheName = 'biblio' + '1.1';
+
+self.addEventListener('install', (evt) => {
+
+    console.log(`sw installé à ${new Date().toLocaleTimeString()}`);
+
+    console.log(`sw installé à ${new Date().toLocaleTimeString()}`);       
+
+    const cachePromise = caches.open(cacheName).then(cache => {
+
+        return cache.addAll([
+
+            'index.html',
+
+            'main.js',
+
+            'style.css',
+
+            'add_book.html',
+
+            'add_book.js'
+        ])
+
+        .then(console.log('cache initialisé'))
+
+        .catch(console.err);
+
+    });
+
+
+    evt.waitUntil(cachePromise);
+
+
+});

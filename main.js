@@ -45,9 +45,8 @@ if(navigator.serviceWorker) {
 
 }
 
-if(window.caches) {
+/*if(window.caches) {
   caches.open('biblio-1.0');
-  caches.open('other-1.0');
   caches.keys().then(console.log);
 }
 caches.open('biblio-1.0').then(cache => {
@@ -57,3 +56,4 @@ caches.open('biblio-1.0').then(cache => {
       'main.js'
   ]);
 });
+*/
