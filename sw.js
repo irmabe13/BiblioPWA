@@ -11,3 +11,10 @@ self.addEventListener('activate', (evt) => {
 self.addEventListener('fetch', (evt) => {
     console.log('fetch sur url', evt.request.url);
 });
+
+self.addEventListener('fetch', (evt) => {
+if(!navigator.onLine) {
+    const headers = { headers: { 'Content-Type': 'text/html;charset=utf-8'} };
+    evt.respondWith(new Response('<h1>Pas de connexion internet</h1><div>Apllication en mode dégradé. Veuillez vous connecter</div>', headers));
+}
+});
