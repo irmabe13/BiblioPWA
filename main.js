@@ -44,3 +44,9 @@ if(navigator.serviceWorker) {
       .catch(err => console.error('service worker NON enregistré', err));
 
 }
+
+if(window.caches) {
+  caches.open('biblio-1.0');
+  caches.open('other-1.0');
+  caches.keys().then(console.log);
+}
