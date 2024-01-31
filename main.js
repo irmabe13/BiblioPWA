@@ -50,3 +50,10 @@ if(window.caches) {
   caches.open('other-1.0');
   caches.keys().then(console.log);
 }
+caches.open('biblio-1.0').then(cache => {
+  // cache.add('index.html');
+  cache.addAll([
+      'index.html',
+      'main.js'
+  ]);
+});
