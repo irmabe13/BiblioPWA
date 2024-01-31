@@ -29,4 +29,18 @@ function loadBooks() {
 }
 
 
-loadBooks(); 
+loadBooks();
+
+if(navigator.serviceWorker) {
+
+  navigator.serviceWorker
+
+      .register('sw.js')
+      navigator.serviceWorker.ready.then(function(swRegistration) {
+
+        return swRegistration.sync.register('foo');
+      
+      })
+      .catch(err => console.error('service worker NON enregistré', err));
+
+}
