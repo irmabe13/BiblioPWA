@@ -45,6 +45,23 @@ if(navigator.serviceWorker) {
 
 }
 
+if (window.Notification && window.Notification !== 'denied') {
+
+  Notification.requestPermission(perm => {
+
+      if(perm === 'granted') {
+
+          const notif = new Notification('Hello notification');
+
+      } else {
+
+          console.log('autorisation de recevoir des notification réfusée');
+
+      }
+
+  })
+
+}
 /*if(window.caches) {
   caches.open('biblio-1.0');
   caches.keys().then(console.log);
