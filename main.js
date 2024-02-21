@@ -69,6 +69,18 @@ if (window.Notification && window.Notification !== 'denied') {
   })
 
 }
+
+self.addEventListener('push', evt =>  {
+
+  console.log(evt);
+
+  console.log('data envoyée par la push notification des dev tools : ', evt.data.text())
+
+  var title = evt.data.text();
+
+  evt.waitUntil(self.registration.showNotification(title, { body: 'ça marche :)', image: 'Images/icons/icon-152x152.png'}));
+
+});
 /*if(window.caches) {
   caches.open('biblio-1.0');
   caches.keys().then(console.log);
