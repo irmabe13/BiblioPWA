@@ -39,7 +39,11 @@ self.addEventListener('install', (evt) => {
 
             'add_book.html',
 
-            'add_book.js'
+            'add_book.js',
+            
+            'contact.html',
+            
+            'contact.js'
         ])
 
         .then(console.log('cache initialisé'))
@@ -48,8 +52,36 @@ self.addEventListener('install', (evt) => {
 
     });
 
+    self.addEventListener('activate', evt => {
+        console.log('activate evt', evt);
+      });
+
 
     evt.waitUntil(cachePromise);
 
 
 });
+
+self.addEventListener('fetch', evt => {
+    if(!navigator.onLine) {
+      const headers = { headers: { 'Content-Type': 'text/html;charset=utf-8'}};
+      evt.respondWith(new Response('<h1>Pas de connexion internet</h1><div>Application en mode dégradé. Veuillez vous connecter</div>', headers));
+    }
+    console.log('fetch event sur url ',evt.request.url);
+  
+    // stratégie de cache only with network fallback
+    evt.respondWith(
+      caches.match(evt.request).then (res => {
+          if(res) {
+             
+              return res;
+            }
+            return fetch(evt.request). then(newResponse => {
+                   
+              caches.open(cacheName). then (cache => cache.put(evt.request, newResponse));
+        
+              return newResponse.clone();
+            })
+          })
+      );
+  });
