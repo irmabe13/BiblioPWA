@@ -1,0 +1,10 @@
+{
+    "name": "Bibliothèque",
+    "short_name": "Biblio",
+    "theme_color": "f8c291",
+    "background_color": "f8c291",
+    "display": "standalone",
+    "orientation": "",
+    "scope": "/",
+    "start_url": "/"
+  }
