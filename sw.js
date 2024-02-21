@@ -5,7 +5,23 @@ self.addEventListener('install', (evt) => {
 });
 
 self.addEventListener('activate', (evt) => {
-    console.log(`sw activé à ${new Date().toLocaleTimeString()}`);    
+    console.log(`sw activé à ${new Date().toLocaleTimeString()}`);
+    
+    let cacheCleanedPromise = caches.keys().then(keys => {
+
+        keys.forEach(key => {
+
+            if(key !== cacheName) {
+
+                return caches.delete(key);
+
+            }
+
+        });
+
+    });
+
+    evt.waitUntil(cacheCleanedPromise);
 });
 
 self.addEventListener('fetch', (evt) => {
@@ -16,16 +32,20 @@ const cacheName = 'biblio' + '1.1';
 
 self.addEventListener('install', evt => {
   console.log('install evt', evt);
-  caches.open(cacheName).then(cache => {
-    cache.addAll([
+  const cachePromise = caches.open(cacheName).then(cache =>{
+    return cache.addAll([
     'index.html',
     'main.js',
     'style.css',
     'add_book.html',
     'add_book.js',
     ])
+    .then(console.log('cache initialisé'))
+    .catch(console.err);
   })
 });
+
+evt.waitUntil(cachePromise);
 
 self.addEventListener('activate', evt => {
   console.log('activate evt', evt);
