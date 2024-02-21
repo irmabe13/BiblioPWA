@@ -97,3 +97,16 @@ self.addEventListener('fetch', evt => {
 
 });
 });
+self.registration.showNotification('Notif depuis le sw', {
+
+    body: 'je suis une notification dite "persistante"'
+
+});
+
+
+
+self.addEventListener('notificationclose', evt => {
+
+    console.log('notification fermée', evt);
+
+})

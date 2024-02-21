@@ -50,7 +50,7 @@ if (window.Notification && window.Notification !== 'denied') {
   Notification.requestPermission(perm => {
 
       if(perm === 'granted') {
-        const options = {
+        /*const options = {
 
           body: 'Je suis le body de la notification',
 
@@ -58,7 +58,7 @@ if (window.Notification && window.Notification !== 'denied') {
 
       }
 
-          const notif = new Notification('Hello notification',options);
+          const notif = new Notification('Hello notification',options);*/
 
       } else {
 
