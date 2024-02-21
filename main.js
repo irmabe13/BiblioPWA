@@ -50,8 +50,15 @@ if (window.Notification && window.Notification !== 'denied') {
   Notification.requestPermission(perm => {
 
       if(perm === 'granted') {
+        const options = {
 
-          const notif = new Notification('Hello notification');
+          body: 'Je suis le body de la notification',
+
+          icon: 'Images/icons/icon-72x72.png'
+
+      }
+
+          const notif = new Notification('Hello notification',options);
 
       } else {
 
